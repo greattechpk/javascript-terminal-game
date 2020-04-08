@@ -1,0 +1,83 @@
+body{
+
+}
+.main-board{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.main-board>div{
+    padding: 10px;
+    margin: 5px;
+    border: black solid 2px;
+    border-radius: 10px;
+    width: 80%;
+}
+
+.stats-board{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.viewport-board{
+
+    display: flex;
+    flex-direction: row;
+}
+.viewport-board>div{
+    width: 50%;
+    min-height: 20vh;
+    margin: 10px;
+    border: black solid 2px;
+    border-radius: 10px;
+}
+
+.challenge-error-board{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+.challenge-error-board>div{
+    width: 50%;
+}
+
+/* terminal styling */
+
+.terminal-board{
+    background-color: black;
+    color: white;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    font-size: 18px;
+}
+.terminal-history{
+    display: block;
+    overflow: scroll;
+    max-height: 20vh;
+}
+
+.terminal-entry{
+    display: flex;
+    flex-direction: row;
+}
+
+#terminal{
+    width: 80%;
+    background-color: black;
+    border:none;
+    color: rgb(16, 240, 248);
+    padding: 0 0 0 5px;
+}
+#folder{
+    font-weight: bold;
+    color: rgb(246, 20, 20);
+}
+
+.terminal-entry > input[type=text]{
+    font-size: 18px;
+     caret-color: #1DB954;
+}

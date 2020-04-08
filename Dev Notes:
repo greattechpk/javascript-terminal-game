@@ -1,0 +1,15 @@
+Dev Notes:
+
+
+
+Terminal Game:
+
+
+build out file path inside object.
+
+
+reflect where the individual is for file path realtime in destination folder.
+
+onkeypress return/enter down .split(" ") foreach evaluate
+
+[0]cd,ls,mv,cp,rm (possibly use switchcase????) ;[1]depending on 0 evaluate string(); if [2] evaluate

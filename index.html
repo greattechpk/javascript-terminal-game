@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style/style.css">
+</head>
+<body>
+    <div class="main-board">
+        <div class="stats-board">
+            <div class="score-lbl">Score:<span id="score">0</span></div>
+            <div class="time-lbl">Time:<span id="time">0:00</span></div>
+        </div>
+        <div class="viewport-board">
+            <div id="source"></div>
+            <div id="destination"></div>
+        </div>
+        <div class="challenge-error-board">
+            <div class="error-lbl">Error: <span id="error"></span></div>
+            <div class="challenge">Challenge: <span id="challenge"></span></div>
+        </div>
+        <div class="terminal-board">
+            <div id="terminal-history">
+            </div>
+            <div class="terminal-entry">
+                <span class="location">
+                    [user@daTerminal <span id="folder">~</span>]
+                </span>
+                <input type="text" name="terminal" id="terminal">
+            </div>
+
+        </div>
+    </div>
+    <script src="js/app.js"></script>
+</body>
+</html>
