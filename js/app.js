@@ -1,4 +1,4 @@
-let objFolderTree = {
+let objTree = {
     home:{
         pictures:{
 
@@ -27,16 +27,42 @@ let objFolderTree = {
 
 const sourceHTML = document.querySelector("#source")
 const destinationHTML = document.querySelector("#destination")
-
-let sourceKeys = []
-let destinationKeys = []
-
-let currentDirectory = objFolderTree
+let loadedObject = objTree
+let currentDirectory = objTree
 let foldeHistory = []
 
-////current and history functions(not done)
 
-function populateHistory(){
+
+
+
+
+// //  console.log(Object.keys(objTree)[0])    
+// let testHome = objTree[Object.keys(objTree)[0]]
+// let newKey = Object.keys(testHome)[4]
+// testHome = testHome[newKey]
+// //  console.log(testHome["workspace"])
+
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////current and history functions(not done)
+
+function changeDirectory(path){
+
+    for(let i =0; i<Object.keys(currentDirectory).length;i++){
+
+    }
+    
+}
+
+
+
+
+
+
+function populateHistory(history){
     
 }
 
@@ -50,7 +76,10 @@ terminal.addEventListener('keyup',()=>{
         let typedArr = typed.split(" ")
         let typedOperation = typedArr[0]
         let typedPath=typedArr[1]
-        let currentFolder = "home"///needs functionalitys
+        let currentFolder = currentDirectory
+        if(currentDirectory === loadedObject){
+            currentFolder = '~'
+        }///needs functionalitys
         //let typedPathArr= typedPath.split("/")
         ////////////////////////////////////////////////////////////Run/Check operations ---- build line for terminal
         const checkingArray = ['ls','cd','mv','cp','pwd','clear']
@@ -65,6 +94,7 @@ terminal.addEventListener('keyup',()=>{
 function createLine(operation,path,folder){
     let enteredLine = document.createElement("p")
         enteredLine.classList = ["entry"]
+        console.log(folder)
         enteredLine.innerHTML='<span>[user@daTerminal <span id="folder">'+ folder +'</span>]</span><span class="operation"> '+operation+'</span><span class="path"> '+path+'</span>'
         terminalHistory.appendChild(enteredLine)
 
@@ -77,16 +107,19 @@ function invLine(){
     terminalHistory.appendChild(inv)
 }
 
-function lsLine(){
+function lsLine(folder){
     let lsLineP = document.createElement("p")
-    lsLineP.innerText = (Object.keys(objFolderTree).join(" "))
+    if(folder === '~'){
+        folder = Object.keys(loadedObject)
+    }//may need else statement for anything other than root
+    lsLineP.innerText = (folder.join(" "))
     terminalHistory.appendChild(lsLineP)
 }
 
 
 function chooseOperation(check,operation,path,folder){
     let find= check.indexOf(operation)
-    console.log(folder)
+    console.log(path)
     switch(find){
         case 0:
             ls(operation,path,folder)
@@ -115,9 +148,9 @@ function chooseOperation(check,operation,path,folder){
 
 function ls(operation,path,folder){
     console.log("ls was here")
-    console.log(folder)
+    console.log(path)
     createLine(operation,path,folder)
-    lsLine(path)
+    lsLine(folder)
 }
 function cd(operation,path,folder){
     console.log("cd was here")
@@ -143,9 +176,9 @@ function invalidOperation(){
 
 
 
+////////////////////////////////////////////////////////////Render Functions
 
-
-function renderItems(view,current,obj){
+function renderItems(view,obj){
     const objArr = Object.keys(obj)//needs to change to current directory
     //resets folders before adding new
     view.innerHTML = ''
@@ -166,18 +199,7 @@ function renderItems(view,current,obj){
     })
 }
 
+renderItems(destinationHTML,currentDirectory["home"])
 
- renderItems(sourceHTML,sourceKeys,objFolderTree)
+ renderItems(sourceHTML,objTree)
 
-//  console.log(Object.keys(objFolderTree)[0])
- console.log(objFolderTree[Object.keys(objFolderTree)[0]])
-    
-    let testHome = objFolderTree[Object.keys(objFolderTree)[0]]
-//  console.log(testHome["workspace"])
-
-renderItems(destinationHTML,destinationKeys,currentDirectory["home"])
-
-
-
-// console.log(sourceKeys)
-// console.log(destinationKeys)
