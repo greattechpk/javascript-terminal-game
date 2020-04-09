@@ -13,3 +13,65 @@ reflect where the individual is for file path realtime in destination folder.
 onkeypress return/enter down .split(" ") foreach evaluate
 
 [0]cd,ls,mv,cp,rm (possibly use switchcase????) ;[1]depending on 0 evaluate string(); if [2] evaluate
+
+
+
+// const buildTreeArray = (obj) => {
+//     const keys = Object.keys(obj)
+//     for(let i=0;i<keys.length;i++){
+//         // console.log(keys)
+//         let currentArr = keyArr
+//         currentArr.push(keys[i])
+
+//         // console.log(keys)
+//         if(Object.keys(obj[keys[i]]).length > 0){
+//             buildTreeArray(obj[keys[i]])
+//             // console.log(currentArr)
+            
+
+//         }
+//     }
+// }
+ 
+// console.log()
+
+// // function buildTreeArray(obj){
+// //     let objAfter ={}
+// //     let stop = 1
+    
+// //     do{
+// //         let keyArr = Object.keys(obj)
+        
+// //         for(let i = 0;i<keyArr.length;i++){
+// //             console.log(keyArr)
+// //             let key = keyArr[i]
+// //             keyArrFinal.push(key)
+// //             if(Object.keys(obj[key]).length > 0){
+// //                 let oldObject = obj
+// //                 keyArr[i] = [keyArr[i]]
+// //                 let accumulator = []
+                
+// //                 for(let j = 0; j < Object.keys(obj[key]).length;j++){
+// //                     let secondLevel = Object.keys(obj[key])
+// //                     accumulator.push(secondLevel[j])
+// //                     // console.log(secondLevel)
+// //                     // console.log(keyArr[i])
+// //                     // console.log(obj[key])
+// //                 }
+// //                 keyArr[i].push(accumulator)
+// //                 console.log(keyArr[i][1][2])
+// //             }
+
+// //         }
+// //         console.log(obj)
+
+        
+
+// //     }while(stop === 0)
+
+// // }
+
+
+// buildTreeArray(objFolderTree)
+
+// console.log(keyArr)

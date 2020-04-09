@@ -74,8 +74,8 @@ body{
 }
 .terminal-history{
     display: block;
-    overflow: scroll;
-    max-height: 20vh;
+    max-height: 100px !important;
+    overflow: hidden;
 }
 
 .terminal-entry{
