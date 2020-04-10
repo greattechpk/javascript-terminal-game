@@ -30,6 +30,7 @@ const destinationHTML = document.querySelector("#destination")
 let loadedObject = objTree
 let currentDirectory = objTree
 let folderHistory = []
+let currentFolder
 
 
 
@@ -54,16 +55,21 @@ let testPath = ["home","workspace"]
 
 function changeDirectory(path){//changes directory form array
     const rememberedDirectory = currentDirectory
+    const tempHist = []
     path = path.split("/")
     for(let i =0; i<path.length;i++){
-        folderHistory.push(path[i])
         currentDirectory = currentDirectory[path[i]]
-        
+
+            tempHist.push(path[i])
+            console.log(tempHist)
+  
     }
-    if (currentDirectory == undefined){
+    if (currentDirectory === undefined){
         currentDirectory = rememberedDirectory
         invLine()
     }else{
+        folderHistory.push(...tempHist)
+        currentFolder = folderHistory[folderHistory.length-1]
         renderItems(destinationHTML,currentDirectory)
     }
     
@@ -91,9 +97,9 @@ terminal.addEventListener('keyup',()=>{
         let typedArr = typed.split(" ")
         let typedOperation = typedArr[0]
         let typedPath=typedArr[1]
-        let currentFolder = currentDirectory
+
         if(currentDirectory === loadedObject){
-            currentFolder = '~'
+            currentFolder = '/'
         }///needs functionalitys
         //let typedPathArr= typedPath.split("/")
         ////////////////////////////////////////////////////////////Run/Check operations ---- build line for terminal
@@ -109,8 +115,8 @@ terminal.addEventListener('keyup',()=>{
 function createLine(operation,path,folder){
     let enteredLine = document.createElement("p")
         enteredLine.classList = ["entry"]
-        console.log(folder)
-        enteredLine.innerHTML='<span>[user@daTerminal <span id="folder">'+ folder +'</span>]</span><span class="operation"> '+operation+'</span><span class="path"> '+path+'</span>'
+        console.log(currentFolder)
+        enteredLine.innerHTML='<span>[user@daTerminal <span id="folder"> '+ currentFolder+' </span>]</span><span class="operation"> '+operation+'</span><span class="path"> '+path+'</span>'
         terminalHistory.appendChild(enteredLine)
 
 }
@@ -171,7 +177,8 @@ function ls(operation,path,folder){
 function cd(operation,path,folder){
     console.log(path)
     console.log("cd was here")
-    changeDirectory(path)
+    changeDirectory(path,folder)
+    console.log(folder)
     createLine(operation,path,folder)
 }
 function mv(){
