@@ -33,53 +33,35 @@ let folderHistory = []
 let currentFolder
 
 
-
-
-
-
-// //  console.log(Object.keys(objTree)[0])    
-// let testHome = objTree[Object.keys(objTree)[0]]
-// let newKey = Object.keys(testHome)[4]
-// testHome = testHome[newKey]
-// //  console.log(testHome["workspace"])
-
-
-
-
-
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////current and history functions(not done)
 
-let testPath = ["home","workspace"]
 
-
-function changeDirectory(path){//changes directory form array
-    const rememberedDirectory = currentDirectory
+function changeDirectoryHistory(path){//changes directory form array
+    const rememberedDirectory = currentDirectory //stores current
     const tempHist = []
-    path = path.split("/")
-    for(let i =0; i<path.length;i++){
-        currentDirectory = currentDirectory[path[i]]
+    
+    targetDirectory(path,tempHist)
 
-            tempHist.push(path[i])
-            console.log(tempHist)
-  
-    }
-    if (currentDirectory === undefined){
+    if (currentDirectory === undefined){ ///////// invalid op line
         currentDirectory = rememberedDirectory
         invLine()
     }else{
-        folderHistory.push(...tempHist)
+        folderHistory = []
+        folderHistory.push(...tempHist) ////////////////////// if directory works out change directory ---- populate folder history ---- and render new directory to viewport
         currentFolder = folderHistory[folderHistory.length-1]
         renderItems(destinationHTML,currentDirectory)
-    }
-    
-    console.log(currentDirectory)
+    }    
     console.log(folderHistory)
-
-    
 }
 
-
+function targetDirectory(path,histArr){
+    path = path.split("/")
+    for(let i =0; i<path.length;i++){
+        
+        currentDirectory = currentDirectory[path[i]]//changes current directory per item in typed path
+        histArr.push(path[i]) //creates a temp array of history for typed path ------------------ SHOULD BE USED TO STORE ..'S FOR CD  
+    }
+}
 
 
 
@@ -101,7 +83,6 @@ terminal.addEventListener('keyup',()=>{
         if(currentDirectory === loadedObject){
             currentFolder = '/'
         }///needs functionalitys
-        //let typedPathArr= typedPath.split("/")
         ////////////////////////////////////////////////////////////Run/Check operations ---- build line for terminal
         const checkingArray = ['ls','cd','mv','cp','pwd','clear']
         chooseOperation(checkingArray,typedOperation,typedPath,currentFolder)
@@ -128,13 +109,18 @@ function invLine(){
     terminalHistory.appendChild(inv)
 }
 
-function lsLine(folder){
+function lsLine(path){
     let lsLineP = document.createElement("p")
-    if(folder === '~'){
-        folder = Object.keys(loadedObject)
+    if(path === '/'){
+        path = Object.keys(loadedObject)
         
-    }//may need else statement for anything other than root
-    lsLineP.innerText = (folder.join(" "))
+    }
+    if(path === undefined){
+        path = Object.keys(currentDirectory)
+    }
+    //may need else statement for anything other than root
+    console.log(path)
+    lsLineP.innerText = (path.join(" "))
     terminalHistory.appendChild(lsLineP)
 }
 
@@ -172,12 +158,12 @@ function ls(operation,path,folder){
     console.log("ls was here")
     console.log(path)
     createLine(operation,path,folder)
-    lsLine(folder)
+    lsLine(path)
 }
 function cd(operation,path,folder){
     console.log(path)
     console.log("cd was here")
-    changeDirectory(path,folder)
+    changeDirectoryHistory(path,folder)
     console.log(folder)
     createLine(operation,path,folder)
 }
