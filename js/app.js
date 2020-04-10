@@ -29,7 +29,7 @@ const sourceHTML = document.querySelector("#source")
 const destinationHTML = document.querySelector("#destination")
 let loadedObject = objTree
 let currentDirectory = objTree
-let foldeHistory = []
+let folderHistory = []
 
 
 
@@ -49,14 +49,29 @@ let foldeHistory = []
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////current and history functions(not done)
 
-function changeDirectory(path){
+let testPath = ["home","workspace"]
 
-    for(let i =0; i<Object.keys(currentDirectory).length;i++){
 
+function changeDirectory(path){//changes directory form array
+    const rememberedDirectory = currentDirectory
+    path = path.split("/")
+    for(let i =0; i<path.length;i++){
+        folderHistory.push(path[i])
+        currentDirectory = currentDirectory[path[i]]
+        
+    }
+    if (currentDirectory == undefined){
+        currentDirectory = rememberedDirectory
+        invLine()
+    }else{
+        renderItems(destinationHTML,currentDirectory)
     }
     
-}
+    console.log(currentDirectory)
+    console.log(folderHistory)
 
+    
+}
 
 
 
@@ -111,6 +126,7 @@ function lsLine(folder){
     let lsLineP = document.createElement("p")
     if(folder === '~'){
         folder = Object.keys(loadedObject)
+        
     }//may need else statement for anything other than root
     lsLineP.innerText = (folder.join(" "))
     terminalHistory.appendChild(lsLineP)
@@ -153,7 +169,9 @@ function ls(operation,path,folder){
     lsLine(folder)
 }
 function cd(operation,path,folder){
+    console.log(path)
     console.log("cd was here")
+    changeDirectory(path)
     createLine(operation,path,folder)
 }
 function mv(){
@@ -199,7 +217,7 @@ function renderItems(view,obj){
     })
 }
 
-renderItems(destinationHTML,currentDirectory["home"])
+renderItems(destinationHTML,currentDirectory)
 
- renderItems(sourceHTML,objTree)
+renderItems(sourceHTML,objTree)
 
