@@ -31,6 +31,7 @@ let loadedObject = objTree
 let currentDirectory = objTree
 let folderHistory = []
 let currentFolder
+const tempHist = []
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////current and history functions(not done)
@@ -38,7 +39,6 @@ let currentFolder
 
 function changeDirectoryHistory(path){//changes directory form array
     const rememberedDirectory = currentDirectory //stores current
-    const tempHist = []
     
     targetDirectory(path,tempHist)
 
@@ -57,9 +57,25 @@ function changeDirectoryHistory(path){//changes directory form array
 function targetDirectory(path,histArr){
     path = path.split("/")
     for(let i =0; i<path.length;i++){
-        
+        let checkStr = ".."
+        console.log("Checking path vs checkstr" + (path[i] == checkStr))
+        if(path[i] == checkStr){
+            console.log(histArr)
+            for(let j =0; j < histArr.length-1;j++){
+                currentDirectory=loadedObject[histArr[j]]
+                console.log(Object.keys(currentDirectory))
+            }
+            histArr.pop()
+            console.log("This is histArr", histArr)
+            if(histArr.length === 0){
+                currentDirectory = loadedObject
+                console.log(currentDirectory)
+            }
+        }else{
         currentDirectory = currentDirectory[path[i]]//changes current directory per item in typed path
-        histArr.push(path[i]) //creates a temp array of history for typed path ------------------ SHOULD BE USED TO STORE ..'S FOR CD  
+        histArr.push(path[i])
+        console.log(tempHist) //creates a temp array of history for typed path ------------------ SHOULD BE USED TO STORE ..'S FOR CD  
+    }
     }
 }
 
@@ -96,7 +112,6 @@ terminal.addEventListener('keyup',()=>{
 function createLine(operation,path,folder){
     let enteredLine = document.createElement("p")
         enteredLine.classList = ["entry"]
-        console.log(currentFolder)
         enteredLine.innerHTML='<span>[user@daTerminal <span id="folder"> '+ currentFolder+' </span>]</span><span class="operation"> '+operation+'</span><span class="path"> '+path+'</span>'
         terminalHistory.appendChild(enteredLine)
 
@@ -164,7 +179,6 @@ function cd(operation,path,folder){
     console.log(path)
     console.log("cd was here")
     changeDirectoryHistory(path,folder)
-    console.log(folder)
     createLine(operation,path,folder)
 }
 function mv(){
