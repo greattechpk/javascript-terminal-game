@@ -1,3 +1,4 @@
+
 let objTree = {
     home:{
         pictures:{
@@ -14,7 +15,15 @@ let objTree = {
         },
         workspace:{
             git:{
-
+                project1: {
+                    banana: {}
+                },
+                project2: {
+                    
+                },
+                project3: {
+                    
+                }
             }
         },
         desktop:{
@@ -60,9 +69,10 @@ function targetDirectory(path,histArr){
         let checkStr = ".."
         console.log("Checking path vs checkstr" + (path[i] == checkStr))
         if(path[i] == checkStr){
+            currentDirectory = {...loadedObject}
             console.log(histArr)
             for(let j =0; j < histArr.length-1;j++){
-                currentDirectory=loadedObject[histArr[j]]
+                currentDirectory=currentDirectory[histArr[j]]
                 console.log(Object.keys(currentDirectory))
             }
             histArr.pop()
@@ -100,7 +110,7 @@ terminal.addEventListener('keyup',()=>{
             currentFolder = '/'
         }///needs functionalitys
         ////////////////////////////////////////////////////////////Run/Check operations ---- build line for terminal
-        const checkingArray = ['ls','cd','mv','cp','pwd','clear']
+        const checkingArray = ['mkdir','ls','cd','mv','rm','cp','pwd','clear']
         chooseOperation(checkingArray,typedOperation,typedPath,currentFolder)
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////build line for terminal
         terminal.value=''
@@ -142,25 +152,32 @@ function lsLine(path){
 
 function chooseOperation(check,operation,path,folder){
     let find= check.indexOf(operation)
+    const command = check[find]
     console.log(path)
-    switch(find){
-        case 0:
+    switch(command){
+        case "ls":
             ls(operation,path,folder)
             break;
-        case 1:
+        case "cd":
             cd(operation,path,folder)
             break;
-        case 2:
+        case "mv":
             mv()
             break;
-        case 3:
+        case "cp":
             cp()
             break;
-        case 4:
+        case "pwd":
             pwd()
             break;
-        case 5:
+        case "clear":
             clear()
+            break;
+        case "mkdir":
+            mkdir(path)
+            break;
+        case "rm":
+            rm(path)
             break;
         default:
             invalidOperation()
@@ -172,7 +189,7 @@ function chooseOperation(check,operation,path,folder){
 function ls(operation,path,folder){
     console.log("ls was here")
     console.log(path)
-    createLine(operation,path,folder)
+    createLine(operation,path)
     lsLine(path)
 }
 function cd(operation,path,folder){
@@ -187,12 +204,24 @@ function mv(){
 function cp(){
     console.log("cp was here")
 }
-function pwd(){
+function pwd(path){
     console.log("pwd was here")
 }
 function clear(){
     terminalHistory.innerHTML = ''
     console.log("clear was here")
+}
+function mkdir(path) {
+    currentDirectory[path] = {}
+    console.log(currentDirectory)
+    console.log(path)
+    console.log(folder)
+    renderItems(destinationHTML,currentDirectory)
+    createLine("mkdir",path)
+}
+function rm(path) {
+    delete currentDirectory[path]
+    renderItems(destinationHTML,currentDirectory)
 }
 function invalidOperation(){
     invLine()
@@ -227,4 +256,3 @@ function renderItems(view,obj){
 renderItems(destinationHTML,currentDirectory)
 
 renderItems(sourceHTML,objTree)
-
