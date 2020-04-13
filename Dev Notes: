@@ -75,3 +75,50 @@ onkeypress return/enter down .split(" ") foreach evaluate
 // buildTreeArray(objFolderTree)
 
 // console.log(keyArr)
+
+
+
+
+
+///////////////////////////////for mv and cp below
+
+// function pasteCurrent(path,item){///////////////mv stuff
+//     let directoryImg = currentDirectory
+//     let histArr = tempHist
+//     let histArrBck = tempHist
+//     path = path.split("/")
+//     for(let i =0; i<path.length;i++){
+//         let checkStr = ".."
+//         if(path[i] == checkStr){
+//             currentDirectory = {...loadedObject}
+//             console.log(histArr)
+//             for(let j =0; j < histArr.length-1;j++){
+//                 currentDirectory=currentDirectory[histArr[j]]
+//                 console.log(currentDirectory)
+//                 console.log(Object.keys(currentDirectory))
+//             }
+//             histArr.pop()
+//             console.log("This is histArr", histArr)
+//             if(histArr.length === 0){
+//                 currentDirectory = loadedObject///may need to fix might reset moves???????????????????????????????????????????????????????????????????????????????????????????????
+//                 console.log(currentDirectory)
+//             }
+//         }else{
+//         currentDirectory = currentDirectory[path[i]]//changes current directory per item in typed path
+//         histArr.push(path[i])
+//         console.log(tempHist) //creates a temp array of history for typed path ------------------ SHOULD BE USED TO STORE ..'S FOR CD  
+//     }
+
+//     }
+//     currentDirectory += item
+//     currentDirectory = directoryImg
+//     tempHist = histArrBck
+// }
+
+//////////////////in event for mv and cp
+
+        // if (typedOperation === "mv"||typedOperation === "cp"){///////////////////mv stuff
+        //     typedToMVCP = typedArr[1]
+        //     typedPath = typedArr[2]
+        // }
+        // console.log(typedToMVCP)

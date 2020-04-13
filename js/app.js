@@ -49,12 +49,39 @@ let timeHtml = document.getElementById("time")
 timeHtml.textContent  = timeCount
 let countdown = setInterval(() => {
     timeCount--
-    (timeCount == 0) ? (timeHtml.textContent = ""): (timeHtml.textContent  = timeCount,console.log(timeHtml.textContent));
+    (timeCount == 0) ? (timeHtml.textContent = ""): (timeHtml.textContent  = timeCount);
     if(timeCount <= 0){
         clearInterval(countdown)};
 },1000)
 
+///challenge array
+let challengeArr = [["cd into the git folder", currentDirectory, loadedObject.home.workspace.git],["cd into project 1",currentDirectory,loadedObject.home.workspace.git.project1]]
+let challengesHtml = document.getElementById("challenges")
+let checkStep = 0
+let checkIndex = challengeArr[checkStep]
+console.log(checkStep)
+let count = 0
+challengeArr.forEach((array)=>{
+    
+    let challengeLine = document.createElement("p")
+    challengeLine.id = `challenge${count + 1}`
+    challengeLine.innerHTML = `${count + 1}. <span class="challenge">${array[0]}</span>`
+    challengesHtml.appendChild(challengeLine)
+    count++
 
+})
+
+function challengeCheck(array){
+    console.log(checkIndex)
+    console.log(currentDirectory)
+    console.log(array[1] === array[2])
+    if (array[1] === array[2]){
+        checkStep = checkStep++
+        checkIndex = challengeArr[checkStep]
+        console.log(checkIndex)
+    }
+
+}
 
 
 ////////////////////////////operation functions
@@ -103,45 +130,12 @@ function targetDirectory(path, histArr) {
     }
 }
 
-// function pasteCurrent(path,item){///////////////mv stuff
-//     let directoryImg = currentDirectory
-//     let histArr = tempHist
-//     let histArrBck = tempHist
-//     path = path.split("/")
-//     for(let i =0; i<path.length;i++){
-//         let checkStr = ".."
-//         if(path[i] == checkStr){
-//             currentDirectory = {...loadedObject}
-//             console.log(histArr)
-//             for(let j =0; j < histArr.length-1;j++){
-//                 currentDirectory=currentDirectory[histArr[j]]
-//                 console.log(currentDirectory)
-//                 console.log(Object.keys(currentDirectory))
-//             }
-//             histArr.pop()
-//             console.log("This is histArr", histArr)
-//             if(histArr.length === 0){
-//                 currentDirectory = loadedObject///may need to fix might reset moves???????????????????????????????????????????????????????????????????????????????????????????????
-//                 console.log(currentDirectory)
-//             }
-//         }else{
-//         currentDirectory = currentDirectory[path[i]]//changes current directory per item in typed path
-//         histArr.push(path[i])
-//         console.log(tempHist) //creates a temp array of history for typed path ------------------ SHOULD BE USED TO STORE ..'S FOR CD  
-//     }
-
-//     }
-//     currentDirectory += item
-//     currentDirectory = directoryImg
-//     tempHist = histArrBck
-// }
-
 // /////////////////////////////////////////////////// Terminal
 const terminal = document.querySelector("#terminal")
 const terminalHistory = document.querySelector("#terminal-history")
 
 terminal.addEventListener('keyup', () => {
-    countdown
+    countdown 
     if (event.keyCode === 13) {
         let typed = terminal.value
         let typedArr = typed.split(" ")
@@ -149,11 +143,7 @@ terminal.addEventListener('keyup', () => {
         let typedToMVCP
         let typedPath = typedArr[1]
 
-        // if (typedOperation === "mv"||typedOperation === "cp"){///////////////////mv stuff
-        //     typedToMVCP = typedArr[1]
-        //     typedPath = typedArr[2]
-        // }
-        // console.log(typedToMVCP)
+
         if (currentDirectory === loadedObject) {
             currentFolder = '/'
         }///needs functionalitys
@@ -163,6 +153,8 @@ terminal.addEventListener('keyup', () => {
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////build line for terminal
         terminal.value = ''
         terminalHistory.scrollTop = terminalHistory.scrollHeight
+
+        challengeCheck(checkIndex)
     }
 })
 

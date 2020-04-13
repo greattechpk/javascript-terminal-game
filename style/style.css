@@ -58,6 +58,10 @@ body{
     color: white;
     padding: 0 20px;
 }
+#challenges{
+    display: flex;
+    flex-direction: column;
+}
 /* terminal styling */
 
 .terminal-board{
