@@ -43,7 +43,7 @@ let tempHist = []
 let directoryToTransfer = {}
 
 ///////////////////////////////Gameify functions
-let timeCount = 20
+let timeCount = 25
 
 let timeHtml = document.getElementById("time")
 timeHtml.textContent  = timeCount
@@ -51,11 +51,12 @@ let countdown = setInterval(() => {
     timeCount--
     (timeCount == 0) ? (timeHtml.textContent = ""): (timeHtml.textContent  = timeCount);
     if(timeCount <= 0){
+        alert("you lose refresh and try again")
         clearInterval(countdown)};
 },1000)
 
 ///challenge array
-let challengeArr = [["cd into the git folder",  loadedObject.home.workspace.git],["cd into project 1",loadedObject.home.workspace.git.project1]]
+let challengeArr = [["cd into the git folder",  loadedObject.home.workspace.git],["cd into project 1",loadedObject.home.workspace.git.project1],["cd into etc",loadedObject.etc]]
 let challengesHtml = document.getElementById("challenges")
 let checkStep = 0
 let checkIndex = challengeArr[checkStep]
@@ -81,6 +82,7 @@ function challengeCheck(array){
         checkIndex = challengeArr[checkStep]
         document.getElementById(`challenge${checkStep}`).classList = ["strike-through"]
         console.log(checkIndex)
+        timeCount += 10
     }
     console.log(checkIndex)
 
