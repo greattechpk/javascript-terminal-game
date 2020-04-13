@@ -6,28 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Muli:ital,wght@0,300;0,400;0,700;1,300;1,700&display=swap" rel="stylesheet"> 
 </head>
 
 <body>
     <div class="main-board">
         <div class="stats-board">
-            <div class="score-lbl">Score:<span id="score">0</span></div>
-            <div class="time-lbl">Time:<span id="time">0:00</span></div>
+            <div class="score-lbl">Score:<span id="score"> 0</span></div>
+            <div class="high-score-lbl">High Score:<span id="high-score"> 0</span></div>
+            <div class="time-lbl">Time:<span id="time"> 00</span>s</div>
         </div>
         <div class="viewport-board">
-            <div class="source-container view">
-                <div>Source Directory:<span class="destination"></span></div>
-                <div id="source"></div>
+            <div class="challenge-container view">
+                <h3>Challenge Board:</h3>
+                <div id="challenge-queue"></div>
             </div>
             <div class="destination-container view">
                 <div>Current Directory:<span class="destination"></span></div>
                 <div id="destination"></div>
             </div>
 
-        </div>
-        <div class="challenge-error-board">
-            <div class="error-lbl">Error: <span id="error"></span></div>
-            <div class="challenge">Challenge: <span id="challenge"></span></div>
         </div>
         <div class="terminal-board">
             <div id="terminal-history">

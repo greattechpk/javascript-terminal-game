@@ -1,3 +1,6 @@
+body{
+    font-family: 'Muli', sans-serif;
+}
 .main-board{
     width: 100%;
     display: flex;
@@ -8,7 +11,7 @@
 .main-board>div{
     padding: 10px;
     margin: 5px;
-    border: black solid 2px;
+    border: black outset 5px;
     border-radius: 10px;
     width: 80%;
 }
@@ -17,6 +20,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    font-size: 20px;
 }
 
 /* viewport styling */
@@ -30,14 +34,14 @@
     width: 50%;
     min-height: 50vh;
     margin: 10px;
-    border: black solid 2px;
-    border-radius: 10px;
+    border: black inset 3px;
     
 }
 
 .view>div{
     margin: 10px;
     display: flex;
+    flex-wrap: wrap;
 }
 
 .folder{
@@ -49,15 +53,11 @@
 
 
 /* challenge section */
-.challenge-error-board{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
+.challenge-container{
+    background-color: #000;
+    color: white;
+    padding: 0 20px;
 }
-.challenge-error-board>div{
-    width: 50%;
-}
-
 /* terminal styling */
 
 .terminal-board{

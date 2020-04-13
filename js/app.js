@@ -1,40 +1,39 @@
 
 let objTree = {
-    home:{
-        pictures:{
+    home: {
+        pictures: {
 
         },
-        documents:{
+        documents: {
 
         },
-        videos:{
+        videos: {
 
         },
-        downloads:{
+        downloads: {
 
         },
-        workspace:{
-            git:{
+        workspace: {
+            git: {
                 project1: {
                     banana: {}
                 },
                 project2: {
-                    
+
                 },
                 project3: {
-                    
+
                 }
             }
         },
-        desktop:{
+        desktop: {
 
         }
     },
-    etc:{}
+    etc: {}
 }
 
 
-const sourceHTML = document.querySelector("#source")
 const destinationHTML = document.querySelector("#destination")
 let loadedObject = objTree
 let currentDirectory = objTree
@@ -43,51 +42,64 @@ let currentFolder
 let tempHist = []
 let directoryToTransfer = {}
 
+///////////////////////////////Gameify functions
+let timeCount = 20
+
+let timeHtml = document.getElementById("time")
+timeHtml.textContent  = timeCount
+let countdown = setInterval(() => {
+    timeCount--
+    (timeCount == 0) ? (timeHtml.textContent = ""): (timeHtml.textContent  = timeCount,console.log(timeHtml.textContent));
+    if(timeCount <= 0){
+        clearInterval(countdown)};
+},1000)
+
+
 
 
 ////////////////////////////operation functions
 
 
-function changeDirectoryHistory(path){//changes directory form array
+function changeDirectoryHistory(path) {//changes directory form array
     const rememberedDirectory = currentDirectory //stores current
-    
-    targetDirectory(path,tempHist)
 
-    if (currentDirectory === undefined){ ///////// invalid op line
+    targetDirectory(path, tempHist)
+
+    if (currentDirectory === undefined) { ///////// invalid op line
         currentDirectory = rememberedDirectory
         invLine()
-    }else{
+    } else {
         folderHistory = []
         folderHistory.push(...tempHist) ////////////////////// if directory works out change directory ---- populate folder history ---- and render new directory to viewport
-        currentFolder = folderHistory[folderHistory.length-1]
-        renderItems(destinationHTML,currentDirectory)
-    }    
+        currentFolder = folderHistory[folderHistory.length - 1]
+        renderItems(destinationHTML, currentDirectory)
+    }
     console.log(folderHistory)
 }
 
-function targetDirectory(path,histArr){
+function targetDirectory(path, histArr) {
     path = path.split("/")
-    for(let i =0; i<path.length;i++){
+    for (let i = 0; i < path.length; i++) {
         let checkStr = ".."
         console.log("Checking path vs checkstr" + (path[i] == checkStr))
-        if(path[i] == checkStr){
-            currentDirectory = {...loadedObject}
+        if (path[i] == checkStr) {
+            currentDirectory = { ...loadedObject }
             console.log(histArr)
-            for(let j =0; j < histArr.length-1;j++){
-                currentDirectory=currentDirectory[histArr[j]]
+            for (let j = 0; j < histArr.length - 1; j++) {
+                currentDirectory = currentDirectory[histArr[j]]
                 console.log(Object.keys(currentDirectory))
             }
             histArr.pop()
             console.log("This is histArr", histArr)
-            if(histArr.length === 0){
+            if (histArr.length === 0) {
                 currentDirectory = loadedObject
                 console.log(currentDirectory)
             }
-        }else{
-        currentDirectory = currentDirectory[path[i]]//changes current directory per item in typed path
-        histArr.push(path[i])
-        console.log(tempHist) //creates a temp array of history for typed path ------------------ SHOULD BE USED TO STORE ..'S FOR CD  
-    }
+        } else {
+            currentDirectory = currentDirectory[path[i]]//changes current directory per item in typed path
+            histArr.push(path[i])
+            console.log(tempHist) //creates a temp array of history for typed path ------------------ SHOULD BE USED TO STORE ..'S FOR CD  
+        }
     }
 }
 
@@ -128,62 +140,63 @@ function targetDirectory(path,histArr){
 const terminal = document.querySelector("#terminal")
 const terminalHistory = document.querySelector("#terminal-history")
 
-terminal.addEventListener('keyup',()=>{
-    if(event.keyCode === 13){
+terminal.addEventListener('keyup', () => {
+    countdown
+    if (event.keyCode === 13) {
         let typed = terminal.value
         let typedArr = typed.split(" ")
         let typedOperation = typedArr[0]
         let typedToMVCP
-        let typedPath=typedArr[1]
+        let typedPath = typedArr[1]
 
         // if (typedOperation === "mv"||typedOperation === "cp"){///////////////////mv stuff
         //     typedToMVCP = typedArr[1]
         //     typedPath = typedArr[2]
         // }
         // console.log(typedToMVCP)
-        if(currentDirectory === loadedObject){
+        if (currentDirectory === loadedObject) {
             currentFolder = '/'
         }///needs functionalitys
         ////////////////////////////////////////////////////////////Run/Check operations ---- build line for terminal
-        const checkingArray = ['mkdir','ls','cd','mv','rm','cp','pwd','clear']
-        chooseOperation(checkingArray,typedOperation,typedPath,currentFolder,typedToMVCP)
+        const checkingArray = ['mkdir', 'ls', 'cd', 'mv', 'rm', 'cp', 'pwd', 'clear']
+        chooseOperation(checkingArray, typedOperation, typedPath, currentFolder, typedToMVCP)
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////build line for terminal
-        terminal.value=''
+        terminal.value = ''
         terminalHistory.scrollTop = terminalHistory.scrollHeight
     }
 })
 
 
 /////////////////////////////////////////////////// terminal line generation
-function createLine(operation,path){
-    if (path === undefined){
+function createLine(operation, path) {
+    if (path === undefined) {
         path = ""
     }
     let enteredLine = document.createElement("p")
-        enteredLine.classList = ["entry"]
-        enteredLine.innerHTML='<span>[user@daTerminal <span id="folder"> '+ currentFolder+' </span>]</span><span class="operation"> '+operation+'</span><span class="path"> '+path+'</span>'
-        terminalHistory.appendChild(enteredLine)
+    enteredLine.classList = ["entry"]
+    enteredLine.innerHTML = '<span>[user@daTerminal <span id="folder"> ' + currentFolder + ' </span>]</span><span class="operation"> ' + operation + '</span><span class="path"> ' + path + '</span>'
+    terminalHistory.appendChild(enteredLine)
 
 }
 
-function invLine(){
+function invLine() {
     let inv = document.createElement("p")
     inv.classList = ["invalid"]
     inv.innerText = "Invalid Operation"
     terminalHistory.appendChild(inv)
 }
 
-function lsLine(path){
+function lsLine(path) {
     let lsLineP = document.createElement("p")
     let lsCrawler = currentDirectory
-    if(path === '/'){
+    if (path === '/') {
         path = Object.keys(loadedObject)
-        
-    }else if(path === undefined){
+
+    } else if (path === undefined) {
         path = Object.keys(currentDirectory)
-    }else{
+    } else {
         path = path.split("/")
-        for(let i = 0; i < path.length;i++){
+        for (let i = 0; i < path.length; i++) {
             lsCrawler = lsCrawler[path[i]]
         }
         path = Object.keys(lsCrawler)
@@ -194,28 +207,28 @@ function lsLine(path){
     terminalHistory.appendChild(lsLineP)
 }
 
-function pwdLine(){
+function pwdLine() {
     console.log(tempHist)
     let pwdLine = tempHist.join("/")
     let pwdLineP = document.createElement("p")
     pwdLineP.innerHTML = pwdLine
     terminalHistory.appendChild(pwdLineP)
-    
+
 }
 
 
-function chooseOperation(check,operation,path,folder,item){
-    let find= check.indexOf(operation)
+function chooseOperation(check, operation, path, folder, item) {
+    let find = check.indexOf(operation)
     const command = check[find]
-    switch(command){
+    switch (command) {
         case "ls":
-            ls(operation,path,folder)
+            ls(operation, path, folder)
             break;
         case "cd":
-            cd(operation,path,folder)
+            cd(operation, path, folder)
             break;
         case "mv":
-            mv(operation,path,folder,item)
+            mv(operation, path, folder, item)
             break;
         case "cp":
             cp()
@@ -240,47 +253,47 @@ function chooseOperation(check,operation,path,folder,item){
 ///////////////////////////////////////////////////////Operation Functions
 
 
-function ls(operation,path,folder){
+function ls(operation, path, folder) {
     console.log("ls was here")
     console.log(path)
-    createLine(operation,path)
+    createLine(operation, path)
     console.log("After create Line ls", path)
     lsLine(path)
 }
-function cd(operation,path,folder){
+function cd(operation, path, folder) {
     console.log(path)
     console.log("cd was here")
-    changeDirectoryHistory(path,folder)
-    createLine(operation,path,folder)
+    changeDirectoryHistory(path, folder)
+    createLine(operation, path, folder)
 }
-function mv(operation,path,folder,item){
+function mv(operation, path, folder, item) {
     console.log("mv was here")
     // let currentItem = currentDirectory[item]
     // pasteCurrent(path,currentItem)
     // delete currentDirectory[path]
     // createLine(operation,path,folder,item)
 }
-function cp(operation,path,folder,item){
+function cp(operation, path, folder, item) {
     console.log("cp was here")
 }
-function pwd(){
+function pwd() {
     createLine("pwd")
     pwdLine()
 }
-function clear(){
+function clear() {
     terminalHistory.innerHTML = ''
     console.log("clear was here")
 }
 function mkdir(path) {
     currentDirectory[path] = {}
-    renderItems(destinationHTML,currentDirectory)
-    createLine("mkdir",path)
+    renderItems(destinationHTML, currentDirectory)
+    createLine("mkdir", path)
 }
 function rm(path) {
     delete currentDirectory[path]
-    renderItems(destinationHTML,currentDirectory)
+    renderItems(destinationHTML, currentDirectory)
 }
-function invalidOperation(){
+function invalidOperation() {
     invLine()
     console.log("invalid operation")
 }
@@ -289,7 +302,7 @@ function invalidOperation(){
 
 ////////////////////////////////////////////////////////////Render Functions
 
-function renderItems(view,obj){
+function renderItems(view, obj) {
     const objArr = Object.keys(obj)//needs to change to current directory
     //resets folders before adding new
     view.innerHTML = ''
@@ -310,6 +323,7 @@ function renderItems(view,obj){
     })
 }
 
-renderItems(destinationHTML,currentDirectory)
+renderItems(destinationHTML, currentDirectory)
 
-renderItems(sourceHTML,objTree)
+
+
