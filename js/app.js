@@ -79,6 +79,7 @@ function challengeCheck(array){
         checkStep++
         console.log(checkStep)
         checkIndex = challengeArr[checkStep]
+        document.getElementById(`challenge${checkStep}`).classList = ["strike-through"]
         console.log(checkIndex)
     }
     console.log(checkIndex)

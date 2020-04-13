@@ -62,6 +62,9 @@ body{
     display: flex;
     flex-direction: column;
 }
+.strike-through{
+    text-decoration: line-through red;
+}
 /* terminal styling */
 
 .terminal-board{
