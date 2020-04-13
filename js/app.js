@@ -55,7 +55,7 @@ let countdown = setInterval(() => {
 },1000)
 
 ///challenge array
-let challengeArr = [["cd into the git folder", currentDirectory, loadedObject.home.workspace.git],["cd into project 1",currentDirectory,loadedObject.home.workspace.git.project1]]
+let challengeArr = [["cd into the git folder",  loadedObject.home.workspace.git],["cd into project 1",loadedObject.home.workspace.git.project1]]
 let challengesHtml = document.getElementById("challenges")
 let checkStep = 0
 let checkIndex = challengeArr[checkStep]
@@ -72,14 +72,16 @@ challengeArr.forEach((array)=>{
 })
 
 function challengeCheck(array){
-    console.log(checkIndex)
-    console.log(currentDirectory)
-    console.log(array[1] === array[2])
-    if (array[1] === array[2]){
-        checkStep = checkStep++
+    let check1 = array[1]
+    console.log(check1 === currentDirectory)
+    console.log(check1)
+    if (check1 == currentDirectory){
+        checkStep++
+        console.log(checkStep)
         checkIndex = challengeArr[checkStep]
         console.log(checkIndex)
     }
+    console.log(checkIndex)
 
 }
 
