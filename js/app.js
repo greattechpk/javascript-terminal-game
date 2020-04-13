@@ -40,10 +40,12 @@ let loadedObject = objTree
 let currentDirectory = objTree
 let folderHistory = []
 let currentFolder
-const tempHist = []
+let tempHist = []
+let directoryToTransfer = {}
 
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////current and history functions(not done)
+
+////////////////////////////operation functions
 
 
 function changeDirectoryHistory(path){//changes directory form array
@@ -89,6 +91,39 @@ function targetDirectory(path,histArr){
     }
 }
 
+// function pasteCurrent(path,item){///////////////mv stuff
+//     let directoryImg = currentDirectory
+//     let histArr = tempHist
+//     let histArrBck = tempHist
+//     path = path.split("/")
+//     for(let i =0; i<path.length;i++){
+//         let checkStr = ".."
+//         if(path[i] == checkStr){
+//             currentDirectory = {...loadedObject}
+//             console.log(histArr)
+//             for(let j =0; j < histArr.length-1;j++){
+//                 currentDirectory=currentDirectory[histArr[j]]
+//                 console.log(currentDirectory)
+//                 console.log(Object.keys(currentDirectory))
+//             }
+//             histArr.pop()
+//             console.log("This is histArr", histArr)
+//             if(histArr.length === 0){
+//                 currentDirectory = loadedObject///may need to fix might reset moves???????????????????????????????????????????????????????????????????????????????????????????????
+//                 console.log(currentDirectory)
+//             }
+//         }else{
+//         currentDirectory = currentDirectory[path[i]]//changes current directory per item in typed path
+//         histArr.push(path[i])
+//         console.log(tempHist) //creates a temp array of history for typed path ------------------ SHOULD BE USED TO STORE ..'S FOR CD  
+//     }
+
+//     }
+//     currentDirectory += item
+//     currentDirectory = directoryImg
+//     tempHist = histArrBck
+// }
+
 // /////////////////////////////////////////////////// Terminal
 const terminal = document.querySelector("#terminal")
 const terminalHistory = document.querySelector("#terminal-history")
@@ -98,14 +133,20 @@ terminal.addEventListener('keyup',()=>{
         let typed = terminal.value
         let typedArr = typed.split(" ")
         let typedOperation = typedArr[0]
+        let typedToMVCP
         let typedPath=typedArr[1]
 
+        // if (typedOperation === "mv"||typedOperation === "cp"){///////////////////mv stuff
+        //     typedToMVCP = typedArr[1]
+        //     typedPath = typedArr[2]
+        // }
+        // console.log(typedToMVCP)
         if(currentDirectory === loadedObject){
             currentFolder = '/'
         }///needs functionalitys
         ////////////////////////////////////////////////////////////Run/Check operations ---- build line for terminal
         const checkingArray = ['mkdir','ls','cd','mv','rm','cp','pwd','clear']
-        chooseOperation(checkingArray,typedOperation,typedPath,currentFolder)
+        chooseOperation(checkingArray,typedOperation,typedPath,currentFolder,typedToMVCP)
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////build line for terminal
         terminal.value=''
         terminalHistory.scrollTop = terminalHistory.scrollHeight
@@ -163,7 +204,7 @@ function pwdLine(){
 }
 
 
-function chooseOperation(check,operation,path,folder){
+function chooseOperation(check,operation,path,folder,item){
     let find= check.indexOf(operation)
     const command = check[find]
     switch(command){
@@ -174,7 +215,7 @@ function chooseOperation(check,operation,path,folder){
             cd(operation,path,folder)
             break;
         case "mv":
-            mv()
+            mv(operation,path,folder,item)
             break;
         case "cp":
             cp()
@@ -198,6 +239,7 @@ function chooseOperation(check,operation,path,folder){
 
 ///////////////////////////////////////////////////////Operation Functions
 
+
 function ls(operation,path,folder){
     console.log("ls was here")
     console.log(path)
@@ -211,10 +253,14 @@ function cd(operation,path,folder){
     changeDirectoryHistory(path,folder)
     createLine(operation,path,folder)
 }
-function mv(){
+function mv(operation,path,folder,item){
     console.log("mv was here")
+    // let currentItem = currentDirectory[item]
+    // pasteCurrent(path,currentItem)
+    // delete currentDirectory[path]
+    // createLine(operation,path,folder,item)
 }
-function cp(){
+function cp(operation,path,folder,item){
     console.log("cp was here")
 }
 function pwd(){
