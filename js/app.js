@@ -120,6 +120,9 @@ terminal.addEventListener('keyup',()=>{
 
 /////////////////////////////////////////////////// terminal line generation
 function createLine(operation,path,folder){
+    if (path === undefined){
+        path = ""
+    }
     let enteredLine = document.createElement("p")
         enteredLine.classList = ["entry"]
         enteredLine.innerHTML='<span>[user@daTerminal <span id="folder"> '+ currentFolder+' </span>]</span><span class="operation"> '+operation+'</span><span class="path"> '+path+'</span>'
@@ -136,12 +139,18 @@ function invLine(){
 
 function lsLine(path){
     let lsLineP = document.createElement("p")
+    let lsCrawler = currentDirectory
     if(path === '/'){
         path = Object.keys(loadedObject)
         
-    }
-    if(path === undefined){
+    }else if(path === undefined){
         path = Object.keys(currentDirectory)
+    }else{
+        path = path.split("/")
+        for(let i = 0; i < path.length;i++){
+            lsCrawler = lsCrawler[path[i]]
+        }
+        path = Object.keys(lsCrawler)
     }
     //may need else statement for anything other than root
     console.log(path)
@@ -190,6 +199,7 @@ function ls(operation,path,folder){
     console.log("ls was here")
     console.log(path)
     createLine(operation,path)
+    console.log("After create Line ls", path)
     lsLine(path)
 }
 function cd(operation,path,folder){
