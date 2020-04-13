@@ -89,12 +89,6 @@ function targetDirectory(path,histArr){
     }
 }
 
-
-
-function populateHistory(history){
-    
-}
-
 // /////////////////////////////////////////////////// Terminal
 const terminal = document.querySelector("#terminal")
 const terminalHistory = document.querySelector("#terminal-history")
@@ -114,12 +108,13 @@ terminal.addEventListener('keyup',()=>{
         chooseOperation(checkingArray,typedOperation,typedPath,currentFolder)
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////build line for terminal
         terminal.value=''
+        terminalHistory.scrollTop = terminalHistory.scrollHeight
     }
 })
 
 
 /////////////////////////////////////////////////// terminal line generation
-function createLine(operation,path,folder){
+function createLine(operation,path){
     if (path === undefined){
         path = ""
     }
@@ -158,11 +153,19 @@ function lsLine(path){
     terminalHistory.appendChild(lsLineP)
 }
 
+function pwdLine(){
+    console.log(tempHist)
+    let pwdLine = tempHist.join("/")
+    let pwdLineP = document.createElement("p")
+    pwdLineP.innerHTML = pwdLine
+    terminalHistory.appendChild(pwdLineP)
+    
+}
+
 
 function chooseOperation(check,operation,path,folder){
     let find= check.indexOf(operation)
     const command = check[find]
-    console.log(path)
     switch(command){
         case "ls":
             ls(operation,path,folder)
@@ -214,8 +217,9 @@ function mv(){
 function cp(){
     console.log("cp was here")
 }
-function pwd(path){
-    console.log("pwd was here")
+function pwd(){
+    createLine("pwd")
+    pwdLine()
 }
 function clear(){
     terminalHistory.innerHTML = ''
@@ -223,9 +227,6 @@ function clear(){
 }
 function mkdir(path) {
     currentDirectory[path] = {}
-    console.log(currentDirectory)
-    console.log(path)
-    console.log(folder)
     renderItems(destinationHTML,currentDirectory)
     createLine("mkdir",path)
 }
