@@ -70,14 +70,14 @@ let count = 0
 let challengeCount = 0
 let challengeTryCount = 0
 let score = 0
-challengeArr.forEach((array)=>{
-    
+
+
+challengeArr.forEach((array)=>{    
     let challengeLine = document.createElement("p")
     challengeLine.id = `challenge${count + 1}`
     challengeLine.innerHTML = `${count + 1}. <span class="challenge">${array[0]}</span>`
     challengesHtml.appendChild(challengeLine)
     count++
-
 })
 
 function challengeCheck(array){
