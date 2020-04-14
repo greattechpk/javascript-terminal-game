@@ -49,11 +49,16 @@ let timeHtml = document.getElementById("time")
 timeHtml.textContent  = timeCount
 let countdown = setInterval(() => {
     timeCount--
-    (timeCount == 0) ? (timeHtml.textContent = ""): (timeHtml.textContent  = timeCount);
+    (timeCount == 0) ? (timeHtml.textContent = "0"): (timeHtml.textContent  = timeCount);
     if(timeCount <= 0){
         alert("you lose refresh and try again")
         clearInterval(countdown)};
 },1000)
+
+function stopTime(){
+    clearInterval(countdown)
+    countdown = 0;
+}
 
 ///challenge array
 let challengeArr = [["cd into the git folder",  loadedObject.home.workspace.git],["cd into project 1",loadedObject.home.workspace.git.project1],["cd into etc",loadedObject.etc]]
@@ -62,6 +67,7 @@ let checkStep = 0
 let checkIndex = challengeArr[checkStep]
 console.log(checkStep)
 let count = 0
+let challengeCount = 0
 challengeArr.forEach((array)=>{
     
     let challengeLine = document.createElement("p")
@@ -81,8 +87,13 @@ function challengeCheck(array){
         console.log(checkStep)
         checkIndex = challengeArr[checkStep]
         document.getElementById(`challenge${checkStep}`).classList = ["strike-through"]
+        challengeCount++
+        if (challengeCount >= challengeArr.length){
+            stopTime()
+            alert("You've won.")
+        }
         console.log(checkIndex)
-        timeCount += 10
+        timeCount += 5
     }
     console.log(checkIndex)
 
