@@ -68,6 +68,8 @@ let checkIndex = challengeArr[checkStep]
 console.log(checkStep)
 let count = 0
 let challengeCount = 0
+let challengeTryCount = 0
+let score = 0
 challengeArr.forEach((array)=>{
     
     let challengeLine = document.createElement("p")
@@ -80,23 +82,37 @@ challengeArr.forEach((array)=>{
 
 function challengeCheck(array){
     let check1 = array[1]
-    console.log(check1 === currentDirectory)
-    console.log(check1)
+    challengeTryCount ++
     if (check1 == currentDirectory){
         checkStep++
         console.log(checkStep)
         checkIndex = challengeArr[checkStep]
         document.getElementById(`challenge${checkStep}`).classList = ["strike-through"]
         challengeCount++
+        challengeScoreCalc(challengeTryCount)
         if (challengeCount >= challengeArr.length){
             stopTime()
             alert("You've won.")
         }
-        console.log(checkIndex)
         timeCount += 5
     }
     console.log(checkIndex)
 
+}
+
+function challengeScoreCalc(count){
+    let challengeScore = 0
+    switch (count){
+        case 1: challengeScore += 1000;
+        case 2: challengeScore += 650;
+        case 3: challengeScore += 400;
+        case 4: challengeScore += 250;
+        default: challengeScore += 100
+    }
+
+    score += challengeScore
+    challengeTryCount = 0
+    document.getElementById("score").innerText = score
 }
 
 
