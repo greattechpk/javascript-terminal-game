@@ -122,14 +122,18 @@ function changeDirectoryHistory(path) {//changes directory form array
 
     if (currentDirectory === undefined) { ///////// invalid op line
         currentDirectory = rememberedDirectory
-        invLine()
+        invLineCheck = true
     } else {
         folderHistory = []
         folderHistory.push(...tempHist) ////////////////////// if directory works out change directory ---- populate folder history ---- and render new directory to viewport
         currentFolder = folderHistory[folderHistory.length - 1]
         renderItems(destinationHTML, currentDirectory)
-        document.getElementById("current-destination").innerText = folderHistory[folderHistory.length-1]
+        
     }
+    document.getElementById("folder2").innerText = folderHistory[folderHistory.length-1]
+    document.getElementById("current-destination").innerText = folderHistory[folderHistory.length-1]
+
+    console.log(folderHistory[folderHistory.length-1])
     console.log(folderHistory)
 }
 
@@ -199,7 +203,7 @@ function createLine(operation, path) {
     terminalHistory.appendChild(enteredLine)
 
 }
-
+let invLineCheck = false
 function invLine() {
     let inv = document.createElement("p")
     inv.classList = ["invalid"]
@@ -286,6 +290,10 @@ function cd(operation, path, folder) {
     console.log("cd was here")
     changeDirectoryHistory(path, folder)
     createLine(operation, path, folder)
+    if (invLineCheck === true){
+        invLine()
+        invLineCheck = false
+    }
 }
 function mv(operation, path, folder, item) {
     console.log("mv was here")
