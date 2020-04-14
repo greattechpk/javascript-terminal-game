@@ -60,12 +60,11 @@ function stopTime(){
     countdown = 0;
 }
 
-///challenge array
+///challenge array and vars
 let challengeArr = [["cd into the git folder",  loadedObject.home.workspace.git],["cd into project 1",loadedObject.home.workspace.git.project1],["cd into etc",loadedObject.etc]]
 let challengesHtml = document.getElementById("challenges")
 let checkStep = 0
 let checkIndex = challengeArr[checkStep]
-console.log(checkStep)
 let count = 0
 let challengeCount = 0
 let challengeTryCount = 0
@@ -85,7 +84,6 @@ function challengeCheck(array){
     challengeTryCount ++
     if (check1 == currentDirectory){
         checkStep++
-        console.log(checkStep)
         checkIndex = challengeArr[checkStep]
         document.getElementById(`challenge${checkStep}`).classList = ["strike-through"]
         challengeCount++
@@ -96,8 +94,6 @@ function challengeCheck(array){
         }
         timeCount += 5
     }
-    console.log(checkIndex)
-
 }
 
 function challengeScoreCalc(count){
@@ -132,6 +128,7 @@ function changeDirectoryHistory(path) {//changes directory form array
         folderHistory.push(...tempHist) ////////////////////// if directory works out change directory ---- populate folder history ---- and render new directory to viewport
         currentFolder = folderHistory[folderHistory.length - 1]
         renderItems(destinationHTML, currentDirectory)
+        document.getElementById("current-destination").innerText = folderHistory[folderHistory.length-1]
     }
     console.log(folderHistory)
 }
