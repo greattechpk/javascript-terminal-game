@@ -1,6 +1,12 @@
 body{
     font-family: 'Muli', sans-serif;
 }
+h1{
+    font-size: 20px;
+    font-weight: 200;
+    letter-spacing: 15px;
+    margin: 0;
+}
 .main-board{
     width: 100%;
     display: flex;
@@ -20,6 +26,7 @@ body{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
     font-size: 20px;
 }
 
@@ -51,6 +58,13 @@ body{
     height: 100px;
 }
 
+/* .stats-board */
+#score{
+    padding:10px;
+}
+#time{
+    padding-left:10px;
+}
 
 /* challenge section */
 .challenge-container{
@@ -114,4 +128,12 @@ body{
 .terminal-entry > input[type=text]{
     font-size: 18px;
      caret-color: #1DB954;
+}
+.entry{
+    margin:3px;
+}
+.invalid{
+    margin: 3px;
+    color: red;
+    font-weight: 700;
 }

@@ -47,18 +47,7 @@ let timeCount = 25
 
 let timeHtml = document.getElementById("time")
 timeHtml.textContent  = timeCount
-let countdown = setInterval(() => {
-    timeCount--
-    (timeCount == 0) ? (timeHtml.textContent = "0"): (timeHtml.textContent  = timeCount);
-    if(timeCount <= 0){
-        alert("you lose refresh and try again")
-        clearInterval(countdown)};
-},1000)
 
-function stopTime(){
-    clearInterval(countdown)
-    countdown = 0;
-}
 
 ///challenge array and vars
 let challengeArr = [["cd into the git folder",  loadedObject.home.workspace.git],["cd into project 1",loadedObject.home.workspace.git.project1],["cd into etc",loadedObject.etc]]
@@ -171,18 +160,33 @@ function targetDirectory(path, histArr) {
     }
 }
 
+let countdown = setInterval(() => {
+    timeCount--
+    (timeCount == 0) ? (timeHtml.textContent = "0"): (timeHtml.textContent  = timeCount);
+    if(timeCount <= 0){
+        alert("you lose refresh and try again")
+        clearInterval(countdown)};
+},1000)
+
+function stopTime(){
+    clearInterval(countdown)
+    countdown = 0;
+}
+
 // /////////////////////////////////////////////////// Terminal
 const terminal = document.querySelector("#terminal")
 const terminalHistory = document.querySelector("#terminal-history")
 
 terminal.addEventListener('keyup', () => {
-    countdown 
     if (event.keyCode === 13) {
         let typed = terminal.value
         let typedArr = typed.split(" ")
         let typedOperation = typedArr[0]
         let typedToMVCP
         let typedPath = typedArr[1]
+
+
+        
 
 
         if (currentDirectory === loadedObject) {
