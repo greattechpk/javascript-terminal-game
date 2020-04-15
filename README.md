@@ -22,8 +22,8 @@ Other operations in the works are in no certain order:
 
 General other features to be added include:
 
--Pathing live render update
--Tab completion
+- Pathing live render update
+- Tab completion
 
 ## Game Rules
 
