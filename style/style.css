@@ -51,6 +51,11 @@ h1{
     flex-wrap: wrap;
 }
 
+.current{
+    font-size: 18px;
+    font-weight: 600;
+}
+
 .folder{
     display: flex;
     flex-direction: column;
