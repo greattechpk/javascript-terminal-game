@@ -37,5 +37,8 @@ Follow the challenge exercises listed before time runs out ever challenge comple
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/43bb8116-3c3e-4a8e-acf8-4448f065785a/deploy-status)](https://app.netlify.com/sites/pk-terminal-bash-game/deploys)
 
+### Project Board
+[Project Board](https://github.com/greattechpk/javascript-terminal-game/projects/1)
+
 This is the wireframe used for the GUI.
 ![Wire Frame of Gui](terminalwireframe.jpg)
