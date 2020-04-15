@@ -106,8 +106,13 @@ function challengeScoreCalc(count){
 
 function changeDirectoryHistory(path) {//changes directory form array
     const rememberedDirectory = currentDirectory //stores current
-
-    targetDirectory(path, tempHist)
+    if(path === "/"){
+        currentDirectory = loadedObject
+        tempHist = []
+    }else{
+        targetDirectory(path, tempHist)
+    }
+    
 
     if (currentDirectory === undefined) { ///////// invalid op line
         currentDirectory = rememberedDirectory
