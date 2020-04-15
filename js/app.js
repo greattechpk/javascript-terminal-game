@@ -134,6 +134,10 @@ function changeDirectoryHistory(path) {//changes directory form array
     if(folderHistory.length === 0){
         folderHTML = "/"
     }
+    if(folderHTML === "home"){
+        folderHTML = "~"
+    }
+
     document.getElementById("folder2").innerText = folderHTML
     document.getElementById("current-destination").innerText =folderHTML 
 
@@ -205,6 +209,9 @@ function createLine(operation, path) {
     let folderHTML =currentFolder
     if(folderHTML === undefined){
         folderHTML = "/"
+    }
+    if (folderHTML === "home"){
+        folderHTML = "~"
     }
     
     enteredLine.classList = ["entry"]
