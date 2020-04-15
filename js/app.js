@@ -109,6 +109,9 @@ function changeDirectoryHistory(path) {//changes directory form array
     if(path === "/"){
         currentDirectory = loadedObject
         tempHist = []
+    }else if(path === "~"){
+        currentDirectory = loadedObject.home
+        tempHist = ["home"]
     }else{
         targetDirectory(path, tempHist)
     }
