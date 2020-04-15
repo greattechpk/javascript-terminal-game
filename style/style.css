@@ -98,9 +98,6 @@ body{
     display: flex;
     flex-direction: row;
 }
-.location{
-    
-}
 
 #terminal{
     width: 70%;

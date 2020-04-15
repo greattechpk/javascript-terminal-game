@@ -130,8 +130,12 @@ function changeDirectoryHistory(path) {//changes directory form array
         renderItems(destinationHTML, currentDirectory)
         
     }
-    document.getElementById("folder2").innerText = folderHistory[folderHistory.length-1]
-    document.getElementById("current-destination").innerText = folderHistory[folderHistory.length-1]
+    let folderHTML =folderHistory[folderHistory.length-1]
+    if(folderHistory.length === 0){
+        folderHTML = "/"
+    }
+    document.getElementById("folder2").innerText = folderHTML
+    document.getElementById("current-destination").innerText =folderHTML 
 
     console.log(folderHistory[folderHistory.length-1])
     console.log(folderHistory)
@@ -198,8 +202,13 @@ function createLine(operation, path) {
         path = ""
     }
     let enteredLine = document.createElement("p")
+    let folderHTML =currentFolder
+    if(folderHTML === undefined){
+        folderHTML = "/"
+    }
+    
     enteredLine.classList = ["entry"]
-    enteredLine.innerHTML = '<span>[user@daTerminal <span id="folder"> ' + currentFolder + ' </span>]</span><span class="operation"> ' + operation + '</span><span class="path"> ' + path + '</span>'
+    enteredLine.innerHTML = '<span>[user@daTerminal <span id="folder"> ' + folderHTML + ' </span>]</span><span class="operation"> ' + operation + '</span><span class="path"> ' + path + '</span>'
     terminalHistory.appendChild(enteredLine)
 
 }
