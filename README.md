@@ -33,7 +33,7 @@ Follow the challenge exercises listed before time runs out ever challenge comple
 
 
 ### Live Version:
-goofy-wozniak-6fc87d.netlify.com
+[Terminal Game](goofy-wozniak-6fc87d.netlify.com)
 
 This is the wireframe used for the GUI.
 ![Wire Frame of Gui](terminalwireframe.jpg)
