@@ -16,9 +16,9 @@ I do Plan on finishing the functionality avaliable at a later date however for n
 
 Other operations in the works are in no certain order: 
 
--mv
--cp
--general mock git commands
+- mv
+- cp
+- general mock git commands
 
 General other features to be added include:
 
