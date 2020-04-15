@@ -34,3 +34,5 @@ Follow the challenge exercises listed before time runs out ever challenge comple
 
 Live Version:
 ### goofy-wozniak-6fc87d.netlify.com
+
+![Wire Frame of Gui](terminalwireframe.jpg)
