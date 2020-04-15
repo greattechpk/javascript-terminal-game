@@ -33,7 +33,9 @@ Follow the challenge exercises listed before time runs out ever challenge comple
 
 
 ### Live Version:
-[Terminal Game](www.goofy-wozniak-6fc87d.netlify.com)
+[Terminal Game](https://pk-terminal-bash-game.netlify.com/)
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/43bb8116-3c3e-4a8e-acf8-4448f065785a/deploy-status)](https://app.netlify.com/sites/pk-terminal-bash-game/deploys)
 
 This is the wireframe used for the GUI.
 ![Wire Frame of Gui](terminalwireframe.jpg)
