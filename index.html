@@ -6,10 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Muli:ital,wght@0,300;0,400;0,700;1,300;1,700&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Muli:ital,wght@0,300;0,400;0,700;1,300;1,700&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
+    <div id="pop-shell" class="popup">
+        <div id="intro" class="message-box">
+            <div class="x"></div>
+            <p class="mssg">Welcome to the terminal this game can help you practice BASH! Press start to recieve a challenge. You will be timed. Or try free mode!</p>
+            <div class="control-box">
+                <button id="start-btn">Start</button>
+                <button id="free-mode-btn">Free Mode</button>
+            </div>
+        </div>
+        <div id="win" class="message-box"></div>
+        <div id="lose" class="message-box"></div>
+    </div>
     <div class="main-board">
         <div class="stats-board">
             <div class="score-lbl">Score:<span id="score"> 0</span></div>
@@ -20,12 +33,12 @@
             <div class="challenge-container view">
                 <h3>Challenge Board:</h3>
                 <div id="challenges">
-                    
+
                 </div>
                 <div id="challenge-queue"></div>
             </div>
             <div class="destination-container view">
-                <div class="current">Current Directory:  <span id="current-destination"></span></div>
+                <div class="current">Current Directory: <span id="current-destination"></span></div>
                 <div id="destination"></div>
             </div>
 

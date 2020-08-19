@@ -33,6 +33,14 @@ let objTree = {
     etc: {}
 }
 
+/////////////////////////////pop up window ids
+const popShell = document.getElementById('pop-shell')
+const introBox = document.getElementById('intro')
+const winBox = document.getElementById('win')
+const loseBox = document.getElementById('lose')
+///pop-up btns
+const startBtn = document.getElementById('start-btn')
+const freeModeBtn = document.getElementById('free-mode-btn')
 
 const destinationHTML = document.querySelector("#destination")
 let loadedObject = objTree
@@ -192,10 +200,6 @@ terminal.addEventListener('keyup', () => {
         let typedOperation = typedArr[0]
         let typedToMVCP
         let typedPath = typedArr[1]
-
-
-        
-
 
         if (currentDirectory === loadedObject) {
             currentFolder = '/'

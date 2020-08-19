@@ -1,4 +1,5 @@
 body{
+    margin:0;
     font-family: 'Muli', sans-serif;
 }
 h1{
@@ -141,4 +142,56 @@ h1{
     margin: 3px;
     color: red;
     font-weight: 700;
+}
+
+/* messages */
+
+#pop-shell{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.473);
+}
+
+.message-box{
+    width: 300px;
+    height: 200px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(94, 87, 87);
+    text-align: center;
+    justify-content: space-evenly;
+    border-radius: 10px;
+    color:#fff;
+}
+
+.mssg{
+    text-transform: uppercase;
+    font-weight: 100;
+    letter-spacing: 5px;
+    font-size: 12px;
+}
+
+#win{
+    display: none;
+}
+
+#lose{
+    display: none;
+}
+
+.control-box > button{
+    padding: 5px 20px;
+    border: 1px solid #000;
+    border-radius: 5px;
+}
+
+.control-box > button:hover{
+    padding: 10px 25px;
+    transition: padding 0.3s;
+    border: 1px solid rgb(255, 0, 0);
 }
