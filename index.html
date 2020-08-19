@@ -11,17 +11,27 @@
 </head>
 
 <body>
-    <div id="pop-shell" class="popup">
+    <div id="pop-shell" class="popup-back">
         <div id="intro" class="message-box">
-            <div class="x"></div>
             <p class="mssg">Welcome to the terminal this game can help you practice BASH! Press start to recieve a challenge. You will be timed. Or try free mode!</p>
             <div class="control-box">
                 <button id="start-btn">Start</button>
                 <button id="free-mode-btn">Free Mode</button>
             </div>
         </div>
-        <div id="win" class="message-box"></div>
-        <div id="lose" class="message-box"></div>
+        <div id="win" class="message-box hide">
+            <div class="control-box">
+                <button id="restart-win-btn">Restart</button>
+                <button id="free-win-btn">Free Mode</button>
+            </div>
+        </div>
+        <div id="lose" class="message-box hide">
+            <div class="control-box">
+                <p class="mssg">You Lose</p>
+                <button id="restart-lose-btn">Restart</button>
+                <button id="free-lose-btn">Free Mode</button>
+            </div>
+        </div>
     </div>
     <div class="main-board">
         <div class="stats-board">

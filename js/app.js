@@ -1,3 +1,4 @@
+// import {renderItems} from './render'
 
 let objTree = {
     home: {
@@ -41,6 +42,15 @@ const loseBox = document.getElementById('lose')
 ///pop-up btns
 const startBtn = document.getElementById('start-btn')
 const freeModeBtn = document.getElementById('free-mode-btn')
+const restartWinBtn = document.getElementById('restart-win-btn')
+const freeWinBtn = document.getElementById('free-win-btn')
+const restartLoseBtn = document.getElementById('restart-lose-btn')
+const freeLoseBtn = document.getElementById('free-lose-btn')
+
+const btnArr = [startBtn,freeModeBtn,restartWinBtn,freeWinBtn,restartLoseBtn,freeLoseBtn]
+const startBtns = [startBtn,restartWinBtn,restartLoseBtn]
+
+//work vars
 
 const destinationHTML = document.querySelector("#destination")
 let loadedObject = objTree
@@ -51,7 +61,7 @@ let tempHist = []
 let directoryToTransfer = {}
 
 ///////////////////////////////Gameify functions
-let timeCount = 25
+let timeCount = 60
 
 let timeHtml = document.getElementById("time")
 timeHtml.textContent  = timeCount
@@ -86,8 +96,10 @@ function challengeCheck(array){
         challengeCount++
         challengeScoreCalc(challengeTryCount)
         if (challengeCount >= challengeArr.length){
+            //win condition            
+            popShell.classList.remove('hide')
+            winBox.classList.remove('hide')
             stopTime()
-            alert("You've won.")
         }
         timeCount += 5
     }
@@ -102,7 +114,6 @@ function challengeScoreCalc(count){
         case 4: challengeScore += 250;
         default: challengeScore += 100
     }
-
     score += challengeScore
     challengeTryCount = 0
     document.getElementById("score").innerText = score
@@ -176,13 +187,18 @@ function targetDirectory(path, histArr) {
     }
 }
 
-let countdown = setInterval(() => {
-    timeCount--
-    (timeCount == 0) ? (timeHtml.textContent = "0"): (timeHtml.textContent  = timeCount);
-    if(timeCount <= 0){
-        alert("you lose refresh and try again")
-        clearInterval(countdown)};
-},1000)
+let countdown
+
+function startTime(){
+    countdown = setInterval(() => {
+        timeCount--
+        (timeCount == 0) ? (timeHtml.textContent = "0"): (timeHtml.textContent  = timeCount);
+        if(timeCount <= 0){
+            popShell.classList.remove('hide')
+            loseBox.classList.remove('hide')
+            clearInterval(countdown)};
+    },1000)
+}
 
 function stopTime(){
     clearInterval(countdown)
@@ -386,5 +402,29 @@ function renderItems(view, obj) {
 
 renderItems(destinationHTML, currentDirectory)
 
+function resetAll(){
+    count = 0
+    challengeCount = 0
+    challengeTryCount = 0
+    score = 0
+    document.getElementById("score").innerText = score
+    document.getElementById('challenges').childNodes.forEach((challengeEntry)=>{
+        challengeEntry.classList=['']
+    })
+}
 
+btnArr.forEach(btn =>{
+    btn.addEventListener("click",()=>{
+        btn.parentElement.parentElement.classList.add('hide')
+        popShell.classList.add('hide')
+    })
+})
+
+startBtns.forEach(btn =>{
+    btn.addEventListener("click",()=>{
+        timeCount=60
+        startTime()
+        resetAll()
+    })
+})
 
